@@ -13,30 +13,28 @@ from domains import domains
 from sklearn.externals import joblib
 import pandas as pd
 
-# Import Models
-model = joblib.load('models/classifier.pkl')
-count_vect = joblib.load('models/count_vect.pkl')
-tfidf = joblib.load('models/tfidf_transformer.pkl')
+def run_classification(new_df):
+    model = joblib.load('models/classifier.pkl')
+    count_vect = joblib.load('models/count_vect.pkl')
+    tfidf = joblib.load('models/tfidf_transformer.pkl')
 
-# Import new files and clean them
-new_df = pd.read_csv('new_import.csv')
-new_df['IssueDesc'] = new_df['IssueDesc'].map(lambda com : data_preparation.clean_text(com))
+    # Import new files and clean them
+    #new_df = pd.read_csv('new_import.csv')
+    new_df['IssueDesc'] = new_df['IssueDesc'].map(lambda com : data_preparation.clean_text(com))
 
-# Because Naive Bayes maps its results to integers, it's necessary to map the domains codes to ints
-# len(domains) + 1 must equal "undetermined" (WIP)
+    # Because Naive Bayes maps its results to integers, it's necessary to map the domains codes to ints
+    # len(domains) + 1 must equal "undetermined" (WIP)
 
-#domains = {13: "undetermined"}
-domain_mapping = {}
+    #domains = {13: "undetermined"}
+    domain_mapping = {}
 
-for index, domain in enumerate(domains):
-    domain_mapping[index] = domain
+    for index, domain in enumerate(domains):
+        domain_mapping[index] = domain
 
-text_features = tfidf.transform(new_df.IssueDesc)
-predictions = model.predict(text_features)
-for text, predicted in zip(new_df.IssueDesc, predictions):
-  new_df['Domain'] = [domain_mapping[p] for p in predictions]
+    text_features = tfidf.transform(new_df.IssueDesc)
+    predictions = model.predict(text_features)
+    for text, predicted in zip(new_df.IssueDesc, predictions):
+        new_df['MSPP_Domain'] = [domain_mapping[p] for p in predictions]
 
-new_df
-
-# save results
-new_df.to_csv('./results/results.csv', encoding='utf-8')
+    # save file in results folder
+    return new_df
