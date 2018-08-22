@@ -17,3 +17,18 @@ For classifying the testing data, the classifier uses decision boundary to separ
 ## Usage
 Just run `jupyter notebook` in terminal and it will run in you rbrowser. 
 Install Jupyter [here](https://jupyter.readthedocs.io/en/latest/install.html) if you haven't yet. 
+
+
+
+## Further Reading and References
+
+### Natual Language Processing
+* [Bag-of-words model](https://en.wikipedia.org/wiki/Bag-of-words_model)
+* [Tokenization](https://en.wikipedia.org/wiki/Lexical_analysis#Tokenization)
+* [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)
+
+
+### Machine Learning Model Selection
+* [Voting Ensemble](http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.VotingClassifier.html)
+* [Implementing Ensemble Models in Sklearn](https://machinelearningmastery.com/ensemble-machine-learning-algorithms-python-scikit-learn/)
+* [AdaBoostClassifier](http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html)
